@@ -31,4 +31,10 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', type: 'image/png', href: '/jp.png' }],
     },
   },
+
+  runtimeConfig: {
+    public: {
+      contactEmail: 'johnpaulwile@gmail.com',
+    },
+  },
 });

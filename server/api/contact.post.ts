@@ -26,12 +26,15 @@ export default defineEventHandler(async (event) => {
   }
 
   // Forward to FormSubmit.co
+  const config = useRuntimeConfig();
+  const contactEmail = config.public?.contactEmail || 'johnpaulwile@gmail.com';
   const formSubmitUrl = `https://formsubmit.co/helpers/form`;
   try {
     await $fetch(formSubmitUrl, {
       method: 'POST',
       body: {
-        _subject: 'New contact form submission',
+        _to: contactEmail,
+        _subject: `New contact form submission from ${name}`,
         _captcha: 'false',
         _template: 'table',
         name,
