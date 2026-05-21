@@ -64,7 +64,7 @@
               </a>
             </UiCardTitle>
             <UiCardDescription class="flex-1 line-clamp-3 mt-2">
-              {{ stripHtml(post.description) }}
+              <span v-html="stripHtml(post.description)" />
             </UiCardDescription>
             <UiCardFooter>
               <a
@@ -125,7 +125,7 @@
               </UiCardTitle>
             </UiCardHeader>
             <UiCardDescription class="flex-1 line-clamp-3">
-              {{ project.description || 'No description available.' }}
+              <span v-html="project.description || 'No description available.'" />
             </UiCardDescription>
             <UiCardFooter class="flex items-center gap-3 mt-2">
               <UiBadge v-if="project.language" variant="secondary" class="text-xs">
