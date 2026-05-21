@@ -2,14 +2,19 @@
   <div>
     <!-- Hero -->
     <section class="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 tracking-tight">
-          John Paul Wile
-        </h1>
-        <p class="mt-6 text-lg sm:text-xl text-zinc-600 max-w-2xl mx-auto">
-          I break things quickly and write about AI tech.
-        </p>
-        <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 max-w-4xl mx-auto text-left sm:text-left">
+        <div
+          class="w-28 h-28 sm:w-36 sm:h-36 rounded bg-center bg-cover bg-no-repeat ring-4 ring-orange-500/20 flex-shrink-0 border-r-4 border-zinc-200 pr-6 sm:pr-10"
+          style="background-image: url('/jp2.jpg');"
+        />
+        <div class="text-center sm:text-left">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 tracking-tight">
+            John Paul Wile
+          </h1>
+          <p class="mt-6 text-lg sm:text-xl text-zinc-600 max-w-2xl">
+            I break things quickly and write about AI tech.
+          </p>
+          <div class="mt-10 flex flex-wrap items-center justify-start gap-4">
           <a
             href="https://johnpaulwile.substack.com"
             target="_blank"
@@ -26,6 +31,7 @@
           </NuxtLink>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Recent Newsletter Posts -->
