@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
   // Forward to FormSubmit.co
   const config = useRuntimeConfig();
   const contactEmail = config.public?.contactEmail || 'johnpaulwile@gmail.com';
-  const formSubmitUrl = `https://formsubmit.co/helpers/form`;
+  const formSubmitUrl = `https://formsubmit.co/ajax`;
   try {
     await $fetch(formSubmitUrl, {
       method: 'POST',
