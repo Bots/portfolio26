@@ -24,7 +24,7 @@
       <!-- Bio -->
       <div class="prose prose-lg max-w-none text-zinc-700 mb-16">
         <p>
-          I'm a Full-Stack Developer / Tech Lead at <a href="https://forwardflow.ai" target="_blank" rel="noopener" class="text-orange-500 hover:text-orange-600 transition-colors font-medium">Forward Flow</a>, with a passion for building things that work well. Previously at Red Mountain Scientific.
+          I'm a Full-Stack Developer with a passion for building things that work well. Previously at Forward Flow and Red Mountain Scientific.
         </p>
         <p>
           I specialize in JavaScript/TypeScript, Java, React, NextJS, NodeJS, Vue, MySQL, PostgreSQL, Docker, Tailwind, and Shadcn. I like to ship fast, iterate often, and write about what I learn along the way.
@@ -40,15 +40,18 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div v-for="category in skillCategories" :key="category.name" class="bg-zinc-50 rounded-xl p-6 hover:bg-zinc-100/50 transition-colors">
             <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 mb-3">{{ category.name }}</h3>
-            <div class="flex flex-wrap gap-2">
-              <span
+            <ul class="space-y-2">
+              <li
                 v-for="skill in category.skills"
-                :key="skill"
-                class="px-3 py-1 text-sm bg-white border border-zinc-200 rounded-full text-zinc-700 hover:border-orange-300 hover:text-orange-600 transition-colors"
+                :key="skill.name"
+                class="flex items-center gap-2 text-zinc-700"
               >
-                {{ skill }}
-              </span>
-            </div>
+                <svg class="w-4 h-4 text-orange-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/>
+                </svg>
+                <span>{{ skill }}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -122,15 +125,15 @@
 const skillCategories = [
   {
     name: 'Frontend',
-    skills: ['React', 'NextJS', 'Vue', 'Tailwind', 'Shadcn', 'TypeScript', 'JavaScript'],
+    skills: ['React', 'Next.js', 'Vue', 'Tailwind CSS', 'Shadcn', 'TypeScript', 'JavaScript'],
   },
   {
     name: 'Backend',
-    skills: ['NodeJS', 'Java', 'Rust', 'APIs', 'Docker', 'PostgreSQL', 'MySQL'],
+    skills: ['Node.js', 'Java', 'APIs', 'Docker', 'PostgreSQL'],
   },
   {
     name: 'AI & ML',
-    skills: ['LLMs', 'Prompt Engineering', 'RAG', 'LangChain', 'AI Agents', 'Computer Use'],
+    skills: ['LLMs', 'RAG', 'llama.cpp', 'AI Agents', 'Ollama'],
   },
   {
     name: 'DevOps & Tools',
@@ -140,10 +143,16 @@ const skillCategories = [
 
 const experience = [
   {
+    title: 'Full-Stack Developer',
+    company: 'Freelance',
+    period: 'Present',
+    description: 'Building scalable web applications and AI-powered products.',
+  },
+  {
     title: 'Tech Lead / Full-Stack Developer',
     company: 'Forward Flow',
-    period: 'Present',
-    description: 'Leading development efforts, building scalable web applications and AI-powered products.',
+    period: 'Previous',
+    description: 'Led development efforts, building scalable web applications and AI-powered products.',
   },
   {
     title: 'Full Stack Developer',
