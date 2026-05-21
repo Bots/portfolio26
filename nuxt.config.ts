@@ -15,26 +15,57 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'John Paul Wile — I break things quickly and write about AI tech',
+      htmlAttrs: {
+        lang: 'en',
+      },
+      bodyAttrs: {
+        class: '',
+      },
       meta: [
+        { charset: 'utf-8' },
         {
           name: 'description',
           content:
-            "John Paul Wile's portfolio — developer, writer, AI enthusiast. Check out my Substack newsletter and projects.",
+            "John Paul Wile's portfolio — Full-stack developer & writer from Colorado Springs. Building things, breaking things, writing about AI tech. Check out my Substack newsletter and projects.",
         },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'keywords', content: 'John Paul Wile, AI, developer, newsletter, Substack, portfolio' },
-        { property: 'og:title', content: 'John Paul Wile' },
-        { property: 'og:description', content: 'I break things quickly and write about AI tech.' },
-        { name: 'twitter:card', content: 'summary' },
+        { name: 'keywords', content: 'John Paul Wile, AI, developer, software engineer, Colorado Springs, newsletter, Substack, portfolio, projects, botsone, tech lead, full-stack' },
+        { name: 'author', content: 'John Paul Wile' },
+        { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
+        { name: 'googlebot', content: 'index, follow' },
+        { name: 'theme-color', content: '#f97316' },
+        { name: 'color-scheme', content: 'light' },
+        { property: 'og:title', content: 'John Paul Wile — Developer & Writer' },
+        { property: 'og:description', content: 'Full-stack developer from Colorado Springs. I break things quickly and write about AI tech.' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://www.botsone.net' },
+        { property: 'og:image', content: 'https://www.botsone.net/og.png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: 'John Paul Wile — Developer & Writer' },
+        { property: 'og:site_name', content: 'John Paul Wile' },
+        { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:site', content: '@jpwile' },
+        { name: 'twitter:creator', content: '@jpwile' },
+        { name: 'twitter:title', content: 'John Paul Wile — Developer & Writer' },
+        { name: 'twitter:description', content: 'Full-stack developer from Colorado Springs. I break things quickly and write about AI tech.' },
+        { name: 'twitter:image', content: 'https://www.botsone.net/og.png' },
+        { name: 'twitter:image:alt', content: 'John Paul Wile — Developer & Writer' },
+        { name: 'msapplication-TileColor', content: '#f97316' },
+        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
       ],
-      link: [{ rel: 'icon', type: 'image/png', href: '/jp.png' }],
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/jp.png' },
+        { rel: 'canonical', href: 'https://www.botsone.net' },
+        { rel: 'preconnect', href: 'https://www.botsone.net', crossorigin: '' },
+      ],
     },
   },
 
   runtimeConfig: {
     public: {
-      contactEmail: 'johnpaulwile@gmail.com',
+      contactEmail: 'botsone@gmail.com',
     },
   },
 });

@@ -1,2 +1,9 @@
 User-Agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: https://www.botsone.net/sitemap.xml
+
+# Crawl delay for friendly bots
+User-Agent: *
+Crawl-delay: 1

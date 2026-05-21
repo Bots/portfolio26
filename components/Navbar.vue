@@ -1,9 +1,13 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
+  <header
+    class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 transition-shadow"
+    :class="{ 'shadow-sm': isScrolled }"
+  >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <nav class="h-16 flex items-center justify-between">
-        <NuxtLink to="/" class="text-xl font-bold text-zinc-900 hover:text-orange-500 transition-colors">
-          JP
+        <NuxtLink to="/" class="text-xl font-bold text-zinc-900 hover:text-orange-500 transition-colors flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-sm font-bold">JP</span>
+          <span class="hidden sm:inline">John Paul Wile</span>
         </NuxtLink>
 
         <!-- Desktop nav -->
@@ -12,9 +16,13 @@
             v-for="item in navItems"
             :key="item.path"
             :to="item.path"
-            :class="['text-sm font-medium transition-colors', route.path === item.path ? 'text-orange-500' : 'text-zinc-600 hover:text-orange-500']"
+            :class="[
+              'text-sm font-medium transition-colors relative py-1',
+              isActive(item.path) ? 'text-orange-500' : 'text-zinc-600 hover:text-orange-500'
+            ]"
           >
             {{ item.label }}
+            <span v-if="isActive(item.path)" class="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-500 rounded-full" />
           </NuxtLink>
           <a
             href="https://johnpaulwile.substack.com"
@@ -53,7 +61,10 @@
           v-for="item in navItems"
           :key="item.path"
           :to="item.path"
-          :class="['block text-sm font-medium transition-colors py-2', route.path === item.path ? 'text-orange-500' : 'text-zinc-600 hover:text-orange-500']"
+          :class="[
+            'block text-sm font-medium transition-colors py-2',
+            isActive(item.path) ? 'text-orange-500' : 'text-zinc-600 hover:text-orange-500'
+          ]"
           @click="isOpen = false"
         >
           {{ item.label }}
@@ -75,6 +86,14 @@
 <script setup lang="ts">
 const route = useRoute();
 const isOpen = ref(false);
+const isScrolled = ref(false);
+
+// Scroll detection for navbar shadow
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    isScrolled.value = window.scrollY > 10;
+  }, { passive: true });
+});
 
 const navItems = [
   { label: 'Home', path: '/' },
@@ -84,8 +103,13 @@ const navItems = [
   { label: 'Contact', path: '/contact' },
 ];
 
+// Better active state detection for nested routes
+function isActive(path: string): boolean {
+  return route.path === path || (path !== '/' && route.path.startsWith(path));
+}
+
 const currentPage = computed(() => {
-  const found = navItems.find((item) => item.path === route.path);
+  const found = navItems.find((item) => isActive(item.path));
   return found ? found.label : '';
 });
 </script>
