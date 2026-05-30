@@ -36,7 +36,7 @@
           :value="code"
           @input="onInput"
           :placeholder="placeholder"
-          class="w-full font-mono text-sm bg-zinc-900 dark:bg-black text-green-400 p-4 rounded-md min-h-[180px] resize-y focus:outline-none focus:ring-2 focus:ring-orange-500/50 placeholder:text-zinc-600 dark:placeholder:text-zinc-700 leading-relaxed"
+          class="w-full font-mono text-sm bg-white dark:bg-zinc-900 text-zinc-900 dark:text-green-400 p-4 rounded-md min-h-[180px] resize-y focus:outline-none focus:ring-2 focus:ring-orange-500/50 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 leading-relaxed"
           spellcheck="false"
         />
       </div>
@@ -105,7 +105,7 @@
       <!-- Solution -->
       <Transition name="hint">
         <div v-if="showSolutionOpen && solution" class="mt-3">
-          <pre class="p-4 bg-zinc-900 dark:bg-black text-green-400 rounded-md overflow-x-auto text-sm font-mono whitespace-pre-wrap">{{ solution }}</pre>
+          <pre class="p-4 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-green-400 rounded-md overflow-x-auto text-sm font-mono whitespace-pre-wrap">{{ solution }}</pre>
         </div>
       </Transition>
     </div>

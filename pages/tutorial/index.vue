@@ -100,7 +100,7 @@ class SimpleTokenizer:
           The core idea: given a sequence of tokens, the model should predict the next token. So for the text <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">[A, B, C, D]</code>, our training pairs are:
         </p>
 
-        <div class="bg-zinc-900 text-green-400 p-4 rounded-md font-mono text-sm overflow-x-auto">
+        <div class="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-green-400 border border-zinc-200 dark:border-zinc-700 p-4 rounded-md font-mono text-sm overflow-x-auto">
           Input:  [A]       → Target: B<br/>
           Input:  [A, B]    → Target: C<br/>
           Input:  [A, B, C] → Target: D
@@ -215,7 +215,7 @@ class SimpleTokenizer:
           Unlike RNNs, transformers process all tokens in parallel. There's no inherent notion of order. We must explicitly add positional information to the embeddings. GPT uses <strong>learned positional embeddings</strong> — a separate embedding table for positions.
         </p>
 
-        <div class="bg-zinc-900 text-green-400 p-4 rounded-md font-mono text-sm overflow-x-auto">
+        <div class="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-green-400 border border-zinc-200 dark:border-zinc-700 p-4 rounded-md font-mono text-sm overflow-x-auto">
           // For each position pos and dimension d:\nif d % 2 == 0:\n    position_encoding[pos, d] = sin(pos / 10000^(d/d_model))\nelse:\n    position_encoding[pos, d] = cos(pos / 10000^((d-1)/d_model))
         </div>
 
@@ -321,7 +321,7 @@ class SimpleTokenizer:
           After attention, each token goes through a position-wise <strong>feed-forward network</strong> (FFN). This is a simple two-layer MLP applied independently to each position:
         </p>
 
-        <div class="bg-zinc-900 text-green-400 p-4 rounded-md font-mono text-sm overflow-x-auto">
+        <div class="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-green-400 border border-zinc-200 dark:border-zinc-700 p-4 rounded-md font-mono text-sm overflow-x-auto">
           FFN(x) = ReLU(x @ W1) @ W2<br/>
           // where W1: (d_model, d_ff) and W2: (d_ff, d_model)<br/>
           // d_ff is typically 4 × d_model
@@ -331,7 +331,7 @@ class SimpleTokenizer:
           Each sub-layer (attention and FFN) has a <strong>residual connection</strong> and <strong>layer normalization</strong>:
         </p>
 
-        <div class="bg-zinc-900 text-green-400 p-4 rounded-md font-mono text-sm overflow-x-auto">
+        <div class="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-green-400 border border-zinc-200 dark:border-zinc-700 p-4 rounded-md font-mono text-sm overflow-x-auto">
           x = x + SubLayer(LayerNorm(x))<br/>
           // for each sub-layer: attention, then FFN
         </div>
@@ -357,7 +357,7 @@ class SimpleTokenizer:
           Now we assemble everything. The full GPT model flows like this:
         </p>
 
-        <div class="bg-zinc-900 text-green-400 p-4 rounded-md font-mono text-sm overflow-x-auto">
+        <div class="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-green-400 border border-zinc-200 dark:border-zinc-700 p-4 rounded-md font-mono text-sm overflow-x-auto">
           Input IDs → Embedding → Positional Embedding<br/>
           → [Transformer Block × N]<br/>
           → LayerNorm → Linear (LM Head) → Softmax → Next Token Probabilities
