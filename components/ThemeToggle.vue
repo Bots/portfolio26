@@ -14,11 +14,13 @@
 </template>
 
 <script setup lang="ts">
+import { useColorMode } from '@vueuse/core';
+
 const colorMode = useColorMode();
 
 const isDark = computed(() => colorMode.value === 'dark');
 
 function toggle() {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+  colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark';
 }
 </script>

@@ -58,7 +58,7 @@
         </button>
 
         <button
-          @click="showHint"
+          @click="addHint"
           class="px-4 py-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
         >
           {{ hintLevel === 0 ? 'Show Hint' : `Hint ${hintLevel}/3` }}
@@ -158,7 +158,7 @@ function check() {
   }
 }
 
-function showHint() {
+function addHint() {
   showHint.value = true;
   hintLevel.value = Math.min(hintLevel.value + 1, 3);
 }

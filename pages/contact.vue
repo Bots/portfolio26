@@ -2,8 +2,8 @@
   <div class="py-20 px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto">
       <div class="mb-12 text-center">
-        <h1 class="text-3xl sm:text-4xl font-bold text-zinc-900">Contact</h1>
-        <p class="mt-4 text-lg text-zinc-600">
+        <h1 class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white">Contact</h1>
+        <p class="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
           Have a question, idea, or just want to say hi? Drop me a message.
         </p>
       </div>
@@ -21,16 +21,16 @@
             class="space-y-6"
             @submit="(e) => { e.preventDefault(); handleSubmit(); }"
           >
-            <div v-if="error" class="p-3 text-sm text-red-600 bg-red-50 rounded-lg">
+            <div v-if="error" class="p-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 rounded-lg">
               {{ error }}
             </div>
 
-            <div v-if="success" class="p-3 text-sm text-green-600 bg-green-50 rounded-lg">
+            <div v-if="success" class="p-3 text-sm text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 rounded-lg">
               Message sent! I'll get back to you soon.
             </div>
 
             <div>
-              <label for="name" class="block text-sm font-medium text-zinc-700 mb-1">
+              <label for="name" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
                 Name
               </label>
               <UiInput
@@ -43,7 +43,7 @@
             </div>
 
             <div>
-              <label for="email" class="block text-sm font-medium text-zinc-700 mb-1">
+              <label for="email" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
                 Email
               </label>
               <UiInput
@@ -56,7 +56,7 @@
             </div>
 
             <div>
-              <label for="message" class="block text-sm font-medium text-zinc-700 mb-1">
+              <label for="message" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
                 Message
               </label>
               <UiTextarea
@@ -75,7 +75,7 @@
 
           <div v-else class="text-center py-8">
             <div class="text-4xl mb-4">✓</div>
-            <p class="text-lg font-medium text-zinc-900">Message sent!</p>
+            <p class="text-lg font-medium text-zinc-900 dark:text-white">Message sent!</p>
             <p class="text-zinc-600 dark:text-zinc-400 mt-1">I'll get back to you soon.</p>
             <UiButton variant="outline" class="mt-4" @click="resetForm">
               Send another message
@@ -85,12 +85,12 @@
       </UiCard>
 
       <!-- Direct contact -->
-      <div class="mt-12 bg-zinc-50 rounded-xl p-6 sm:p-8">
+      <div class="mt-12 bg-zinc-50 dark:bg-black rounded-xl p-6 sm:p-8">
         <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-4">Or reach me directly</h3>
         <div class="flex flex-col sm:flex-row gap-4">
           <a
             href="mailto:botsone@gmail.com"
-            class="flex items-center gap-3 text-zinc-700 hover:text-orange-500 transition-colors"
+            class="flex items-center gap-3 text-zinc-700 dark:text-zinc-300 hover:text-orange-500 transition-colors"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -101,7 +101,7 @@
             href="https://twitter.com/jpwile"
             target="_blank"
             rel="noopener"
-            class="flex items-center gap-3 text-zinc-700 hover:text-orange-500 transition-colors"
+            class="flex items-center gap-3 text-zinc-700 dark:text-zinc-300 hover:text-orange-500 transition-colors"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             <span class="text-sm">@jpwile</span>

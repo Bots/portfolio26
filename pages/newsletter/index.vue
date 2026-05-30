@@ -2,14 +2,14 @@
   <div class="py-20 px-4 sm:px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
       <div class="mb-12">
-        <h1 class="text-3xl sm:text-4xl font-bold text-zinc-900">Newsletter</h1>
+        <h1 class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white">Newsletter</h1>
         <p class="mt-4 text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl">
           Thoughts on AI, development, and technology. Published on <a href="https://johnpaulwile.substack.com" target="_blank" rel="noopener" class="text-orange-500 hover:text-orange-600 transition-colors underline">Substack</a>.
         </p>
       </div>
 
       <div v-if="(posts?.length ?? 0) === 0" class="text-center py-20">
-        <p class="text-zinc-500">Loading posts...</p>
+        <p class="text-zinc-500 dark:text-zinc-400">Loading posts...</p>
       </div>
 
       <div v-else class="space-y-6">

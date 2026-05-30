@@ -1,8 +1,8 @@
 <template>
   <div class="my-8 overflow-x-auto">
-    <svg viewBox="0 0 900 340" class="w-full max-w-[900px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 900 340" class="diagram-tokenizer w-full max-w-[900px] mx-auto" xmlns="http://www.w3.org/2000/svg">
       <!-- Background -->
-      <rect width="900" height="340" fill="#fafafa" rx="8" />
+      <rect width="900" height="340" fill="#fafafa" class="dark:fill-zinc-950" rx="8" />
 
       <!-- Title -->
       <text x="450" y="30" text-anchor="middle" font-size="16" fill="#18181b" font-weight="700">Byte Pair Encoding (BPE) Tokenization</text>
@@ -73,3 +73,16 @@
     </svg>
   </div>
 </template>
+
+<style scoped>
+.dark .diagram-tokenizer text {
+  fill: #d4d4d8 !important;
+}
+.dark .diagram-tokenizer line,
+.dark .diagram-tokenizer path {
+  stroke: #71717a !important;
+}
+.dark .diagram-tokenizer polygon {
+  fill: #71717a !important;
+}
+</style>

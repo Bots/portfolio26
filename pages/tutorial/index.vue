@@ -2,13 +2,13 @@
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header -->
     <div class="mb-12">
-      <span class="inline-block px-3 py-1 text-xs font-medium bg-orange-100 text-orange-700 rounded-full mb-4">Interactive Tutorial</span>
+      <span class="inline-block px-3 py-1 text-xs font-medium bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full mb-4">Interactive Tutorial</span>
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white mb-4">Let's Build GPT</h1>
-      <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-4">
+      <p class="text-lg text-zinc-600 dark:text-zinc-300 mb-4">
         A thorough, interactive tutorial based on Andrej Karpathy's "Let's Build GPT" series.
         You'll build a GPT model from scratch — character by character, token by token, weight by weight.
       </p>
-      <p class="text-sm text-zinc-500">
+      <p class="text-sm text-zinc-500 dark:text-zinc-400">
         Inspired by <a href="https://www.youtube.com/watch?v=VMj-3S1qp0o" target="_blank" rel="noopener" class="text-orange-500 hover:text-orange-600">Karpathy's YouTube series</a>.
       </p>
     </div>
@@ -21,7 +21,7 @@
           :key="section.id"
           :to="`#${section.id}`"
           class="block text-xs py-1 px-2 rounded transition-colors"
-          :class="activeSection === section.id ? 'text-orange-500 font-medium bg-orange-50' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700'"
+          :class="activeSection === section.id ? 'text-orange-500 font-medium bg-orange-50' : 'text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'"
         >
           {{ i + 1 }}. {{ section.label }}
         </NuxtLink>
@@ -32,21 +32,21 @@
     <div class="lg:mr-52 space-y-16">
       <!-- Section 1: Introduction -->
       <TutorialSection id="intro" step="1" title="What is GPT?" subtitle="Understanding the big picture before diving into code.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           GPT stands for <strong>Generative Pre-trained Transformer</strong>. It's a type of language model that generates text one token at a time. Despite their complexity, GPT models are built from relatively simple components: matrix multiplications, additions, and a few clever tricks.
         </p>
 
-        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-4">
-          <p class="text-sm text-blue-800">
+        <div class="bg-blue-50 dark:bg-black dark:border-blue-500 border-l-4 border-blue-400 p-4 my-4">
+          <p class="text-sm text-blue-800 dark:text-blue-300">
             <strong>Key insight:</strong> GPT is an <em>autoregressive</em> model — it predicts the next token given all previous tokens. This simple idea, scaled up with more data and compute, produces remarkably capable language models.
           </p>
         </div>
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           The architecture Karpathy walks us through consists of:
         </p>
 
-        <ul class="space-y-2 text-zinc-700">
+        <ul class="space-y-2 text-zinc-700 dark:text-zinc-300">
           <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span> A <strong>tokenizer</strong> that converts raw text into token IDs</li>
           <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span> An <strong>embedding layer</strong> that maps tokens to dense vectors</li>
           <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span> A series of <strong>transformer blocks</strong>, each with attention and feed-forward layers</li>
@@ -55,7 +55,7 @@
 
         <DiagramTransformer />
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           The entire model is essentially a big computation graph. You feed in token IDs, they flow through matrix multiplications and activations, and you get out a probability distribution over the next token. You sample from that distribution, append the chosen token, and repeat.
         </p>
 
@@ -81,7 +81,7 @@ class SimpleTokenizer:
 
     def decode(self, ids):
         # Convert each ID back to its character, then join
-        return "".join([self.id2str[i] for i in ids])"
+        return ''.join([self.id2str[i] for i in ids])"
           hint="Use sorted(set(text)) to get unique characters. Use enumerate() to assign IDs."
           hintDetail="str2id maps 'h' -> 0, 'e' -> 1, etc. id2str does the reverse: 0 -> 'h', 1 -> 'e'."
           hintFull="Look at the solution below — it's just 4 lines of setup in __init__."
@@ -92,12 +92,12 @@ class SimpleTokenizer:
 
       <!-- Section 2: Data Generation -->
       <TutorialSection id="data" step="2" title="Generating Training Data" subtitle="Creating a dataset to train our model on.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Before training, we need data. In Karpathy's tutorial, he uses a simple text file (like all of Shakespeare or a Bible). For our purposes, let's imagine we're training on a corpus of text and need to create input-output pairs for supervised learning.
         </p>
 
-        <p class="text-zinc-700 leading-relaxed">
-          The core idea: given a sequence of tokens, the model should predict the next token. So for the text <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">[A, B, C, D]</code>, our training pairs are:
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
+          The core idea: given a sequence of tokens, the model should predict the next token. So for the text <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">[A, B, C, D]</code>, our training pairs are:
         </p>
 
         <div class="bg-zinc-900 text-green-400 p-4 rounded-md font-mono text-sm overflow-x-auto">
@@ -106,7 +106,7 @@ class SimpleTokenizer:
           Input:  [A, B, C] → Target: D
         </div>
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Each training example is a context window — a fixed-length sequence of tokens. The model learns to predict what comes next within that window.
         </p>
 
@@ -122,8 +122,8 @@ class SimpleTokenizer:
           :solution="solutions.create_training_data"
         />
 
-        <p class="text-zinc-700 leading-relaxed mt-6">
-          Now let's convert these to PyTorch tensors and think about batching. In practice, we don't process one example at a time — we process <strong>batches</strong>. A batch is a 2D tensor of shape <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">(batch_size, block_size)</code>.
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed mt-6">
+          Now let's convert these to PyTorch tensors and think about batching. In practice, we don't process one example at a time — we process <strong>batches</strong>. A batch is a 2D tensor of shape <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">(batch_size, block_size)</code>.
         </p>
 
         <InteractiveCodeBlock
@@ -141,17 +141,17 @@ class SimpleTokenizer:
 
       <!-- Section 3: Tokenizer -->
       <TutorialSection id="tokenizer" step="3" title="Byte Pair Encoding Tokenizer" subtitle="How real GPT models convert text into token IDs.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Character-level tokenization (from Section 1) is too slow for large vocabularies. Real GPT models use <strong>Byte Pair Encoding (BPE)</strong>, which learns to merge frequent character sequences into tokens. This gives a vocabulary of ~50,000 tokens instead of millions.
         </p>
 
         <DiagramTokenizer />
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           BPE works by iteratively merging the most frequent pair of adjacent tokens. Here's the algorithm:
         </p>
 
-        <ol class="space-y-3 text-zinc-700 list-decimal list-inside">
+        <ol class="space-y-3 text-zinc-700 dark:text-zinc-300 list-decimal list-inside">
           <li>Start with character-level tokens</li>
           <li>Scan the corpus and count all adjacent pairs</li>
           <li>Merge the most frequent pair into a new token</li>
@@ -159,7 +159,7 @@ class SimpleTokenizer:
           <li>The result is a vocabulary where common subwords are single tokens</li>
         </ol>
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Karpathy's implementation uses a simple BPE tokenizer. The key data structure is a dictionary mapping tuples of two tokens to their merge frequency.
         </p>
 
@@ -178,18 +178,18 @@ class SimpleTokenizer:
 
       <!-- Section 4: Embeddings -->
       <TutorialSection id="embeddings" step="4" title="Token Embeddings" subtitle="Converting discrete token IDs into continuous vectors.">
-        <p class="text-zinc-700 leading-relaxed">
-          Neural networks can't work with discrete token IDs directly. We need to map each token ID to a dense vector of floating-point numbers. This is done via an <strong>embedding lookup table</strong> — essentially a large 2D array where row <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">i</code> contains the embedding for token ID <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">i</code>.
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
+          Neural networks can't work with discrete token IDs directly. We need to map each token ID to a dense vector of floating-point numbers. This is done via an <strong>embedding lookup table</strong> — essentially a large 2D array where row <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">i</code> contains the embedding for token ID <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">i</code>.
         </p>
 
-        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-4">
-          <p class="text-sm text-blue-800">
+        <div class="bg-blue-50 dark:bg-black dark:border-blue-500 border-l-4 border-blue-400 p-4 my-4">
+          <p class="text-sm text-blue-800 dark:text-blue-300">
             <strong>Shape:</strong> If vocabulary size is <code class="font-mono">vocab_size</code> and embedding dimension is <code class="font-mono">d_model</code>, the embedding table has shape <code class="font-mono">(vocab_size, d_model)</code>. For GPT-2: 50,257 × 768.
           </p>
         </div>
 
-        <p class="text-zinc-700 leading-relaxed">
-          In PyTorch, this is a simple <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">nn.Embedding</code> layer. But under the hood, it's just indexed lookup: given input IDs of shape <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">(batch_size, seq_len)</code>, the output is <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">(batch_size, seq_len, d_model)</code>.
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
+          In PyTorch, this is a simple <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">nn.Embedding</code> layer. But under the hood, it's just indexed lookup: given input IDs of shape <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">(batch_size, seq_len)</code>, the output is <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">(batch_size, seq_len, d_model)</code>.
         </p>
 
         <InteractiveCodeBlock
@@ -204,14 +204,14 @@ class SimpleTokenizer:
           :solution="solutions.embed_lookup"
         />
 
-        <p class="text-zinc-700 leading-relaxed mt-6">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed mt-6">
           But wait — the embedding table doesn't know about token <em>positions</em>. "Hello world" and "world hello" would get the same embeddings. We need to add <strong>positional information</strong>.
         </p>
       </TutorialSection>
 
       <!-- Section 5: Positional Encoding -->
       <TutorialSection id="positional" step="5" title="Positional Encoding" subtitle="Adding position information to token embeddings.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Unlike RNNs, transformers process all tokens in parallel. There's no inherent notion of order. We must explicitly add positional information to the embeddings. GPT uses <strong>learned positional embeddings</strong> — a separate embedding table for positions.
         </p>
 
@@ -219,7 +219,7 @@ class SimpleTokenizer:
           // For each position pos and dimension d:\nif d % 2 == 0:\n    position_encoding[pos, d] = sin(pos / 10000^(d/d_model))\nelse:\n    position_encoding[pos, d] = cos(pos / 10000^((d-1)/d_model))
         </div>
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           This is the original positional encoding from the "Attention Is All You Need" paper. GPT actually uses learned embeddings instead of these sinusoidal encodings, but the math is instructive.
         </p>
 
@@ -231,7 +231,7 @@ class SimpleTokenizer:
           :solution="solutions.pos_encoding"
         />
 
-        <p class="text-zinc-700 leading-relaxed mt-6">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed mt-6">
           In practice for GPT, we use learned positional embeddings instead. The code is simpler:
         </p>
 
@@ -246,24 +246,24 @@ class SimpleTokenizer:
 
       <!-- Section 6: Causal Self-Attention -->
       <TutorialSection id="attention" step="6" title="Causal Self-Attention" subtitle="The core mechanism that lets GPT attend to previous tokens.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           This is the heart of GPT. <strong>Self-attention</strong> allows each token to attend to all other tokens in the sequence and aggregate information. <strong>Causal</strong> (or masked) self-attention ensures each token can only attend to itself and previous tokens — no looking ahead. This is what makes GPT autoregressive.
         </p>
 
         <DiagramAttention />
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           The attention mechanism works in three steps:
         </p>
 
-        <ol class="space-y-3 text-zinc-700 list-decimal list-inside">
-          <li><strong>Compute scores:</strong> For each query token, compute its dot product with every key token. This gives an <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">(seq_len, seq_len)</code> attention score matrix.</li>
-          <li><strong>Mask and scale:</strong> Zero out the upper triangle (future tokens) and divide by <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">√d_k</code> to prevent softmax from producing extremely peaked distributions.</li>
+        <ol class="space-y-3 text-zinc-700 dark:text-zinc-300 list-decimal list-inside">
+          <li><strong>Compute scores:</strong> For each query token, compute its dot product with every key token. This gives an <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">(seq_len, seq_len)</code> attention score matrix.</li>
+          <li><strong>Mask and scale:</strong> Zero out the upper triangle (future tokens) and divide by <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">√d_k</code> to prevent softmax from producing extremely peaked distributions.</li>
           <li><strong>Weighted sum:</strong> Apply softmax to get weights, then use them to weight-value each value vector.</li>
         </ol>
 
-        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-4">
-          <p class="text-sm text-blue-800">
+        <div class="bg-blue-50 dark:bg-black dark:border-blue-500 border-l-4 border-blue-400 p-4 my-4">
+          <p class="text-sm text-blue-800 dark:text-blue-300">
             <strong>Why causal masking?</strong> During training, we want the model to learn to predict the next token. If tokens could see future tokens, they'd "cheat" — the learned representations would be useless at inference time when future tokens don't exist yet.
           </p>
         </div>
@@ -276,7 +276,7 @@ class SimpleTokenizer:
           :solution="solutions.causal_attention"
         />
 
-        <p class="text-zinc-700 leading-relaxed mt-6">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed mt-6">
           Let's also implement the linear projections that create Q, K, V from the input. Each head has its own projection weights.
         </p>
 
@@ -291,19 +291,19 @@ class SimpleTokenizer:
 
       <!-- Section 7: Multi-Head Attention -->
       <TutorialSection id="multihead" step="7" title="Multi-Head Attention" subtitle="Running multiple attention mechanisms in parallel.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Single-head attention is limiting — it can only focus on one pattern at a time. <strong>Multi-head attention</strong> splits the embedding dimension into multiple "heads," each learning different attention patterns. Think of it as having multiple "representations" of the same sequence, each focusing on different aspects.
         </p>
 
-        <ol class="space-y-3 text-zinc-700 list-decimal list-inside">
-          <li>Split the embedding dimension <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">d_model</code> into <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">num_heads × head_dim</code></li>
+        <ol class="space-y-3 text-zinc-700 dark:text-zinc-300 list-decimal list-inside">
+          <li>Split the embedding dimension <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">d_model</code> into <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">num_heads × head_dim</code></li>
           <li>Run causal attention independently on each head</li>
           <li>Concatenate all head outputs</li>
-          <li>Project back to <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">d_model</code> with a final linear layer</li>
+          <li>Project back to <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">d_model</code> with a final linear layer</li>
         </ol>
 
-        <p class="text-zinc-700 leading-relaxed">
-          GPT-2 uses 12 heads for GPT-2 (small) and 12 heads for GPT-2 (medium), each with head dimension 64. The total must equal <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">d_model</code>.
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
+          GPT-2 uses 12 heads for GPT-2 (small) and 12 heads for GPT-2 (medium), each with head dimension 64. The total must equal <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">d_model</code>.
         </p>
 
         <InteractiveCodeBlock
@@ -317,7 +317,7 @@ class SimpleTokenizer:
 
       <!-- Section 8: Feed-Forward & Residual Connections -->
       <TutorialSection id="ffn" step="8" title="Feed-Forward & Residual Connections" subtitle="The second half of each transformer block.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           After attention, each token goes through a position-wise <strong>feed-forward network</strong> (FFN). This is a simple two-layer MLP applied independently to each position:
         </p>
 
@@ -327,7 +327,7 @@ class SimpleTokenizer:
           // d_ff is typically 4 × d_model
         </div>
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Each sub-layer (attention and FFN) has a <strong>residual connection</strong> and <strong>layer normalization</strong>:
         </p>
 
@@ -336,8 +336,8 @@ class SimpleTokenizer:
           // for each sub-layer: attention, then FFN
         </div>
 
-        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-4">
-          <p class="text-sm text-blue-800">
+        <div class="bg-blue-50 dark:bg-black dark:border-blue-500 border-l-4 border-blue-400 p-4 my-4">
+          <p class="text-sm text-blue-800 dark:text-blue-300">
             <strong>Why residual connections?</strong> They allow gradients to flow through many layers without vanishing. Without them, training deep networks becomes extremely difficult. They also let the network learn identity functions easily.
           </p>
         </div>
@@ -353,7 +353,7 @@ class SimpleTokenizer:
 
       <!-- Section 9: The Full Model -->
       <TutorialSection id="model" step="9" title="Assembling the Full Model" subtitle="Putting all components together into one coherent model.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Now we assemble everything. The full GPT model flows like this:
         </p>
 
@@ -374,20 +374,20 @@ class SimpleTokenizer:
 
       <!-- Section 10: Training -->
       <TutorialSection id="training" step="10" title="Training Loop" subtitle="Teaching the model to predict the next token.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Training GPT is straightforward supervised learning. For each batch:
         </p>
 
-        <ol class="space-y-3 text-zinc-700 list-decimal list-inside">
-          <li>Forward pass: get logits of shape <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">(batch_size, seq_len, vocab_size)</code></li>
-          <li>Reshape for cross-entropy loss: <code class="bg-zinc-100 px-2 py-0.5 rounded text-sm">(batch_size × seq_len, vocab_size)</code></li>
+        <ol class="space-y-3 text-zinc-700 dark:text-zinc-300 list-decimal list-inside">
+          <li>Forward pass: get logits of shape <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">(batch_size, seq_len, vocab_size)</code></li>
+          <li>Reshape for cross-entropy loss: <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-sm">(batch_size × seq_len, vocab_size)</code></li>
           <li>Compute cross-entropy loss against target tokens</li>
           <li>Backward pass: compute gradients</li>
           <li>Update weights with optimizer (AdamW in Karpathy's case)</li>
         </ol>
 
-        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-4">
-          <p class="text-sm text-blue-800">
+        <div class="bg-blue-50 dark:bg-black dark:border-blue-500 border-l-4 border-blue-400 p-4 my-4">
+          <p class="text-sm text-blue-800 dark:text-blue-300">
             <strong>Cross-entropy loss</strong> measures how far the predicted probability distribution is from the true distribution (one-hot encoded target). Lower loss means the model assigns higher probability to the correct next token.
           </p>
         </div>
@@ -400,7 +400,7 @@ class SimpleTokenizer:
           :solution="solutions.train_step"
         />
 
-        <p class="text-zinc-700 leading-relaxed mt-6">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed mt-6">
           Here's the full training loop with learning rate scheduling:
         </p>
 
@@ -415,11 +415,11 @@ class SimpleTokenizer:
 
       <!-- Section 11: Inference -->
       <TutorialSection id="inference" step="11" title="Text Generation (Inference)" subtitle="Sampling text from the trained model.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           At inference time, we feed in a prompt and generate text one token at a time:
         </p>
 
-        <ol class="space-y-3 text-zinc-700 list-decimal list-inside">
+        <ol class="space-y-3 text-zinc-700 dark:text-zinc-300 list-decimal list-inside">
           <li>Tokenize the prompt and convert to IDs</li>
           <li>Run forward pass to get logits for next token</li>
           <li>Take the logits at the last position, apply softmax to get probabilities</li>
@@ -436,8 +436,8 @@ class SimpleTokenizer:
           :solution="solutions.generate_text"
         />
 
-        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-4">
-          <p class="text-sm text-blue-800">
+        <div class="bg-blue-50 dark:bg-black dark:border-blue-500 border-l-4 border-blue-400 p-4 my-4">
+          <p class="text-sm text-blue-800 dark:text-blue-300">
             <strong>Temperature</strong> controls the randomness of sampling. At temperature = 0, you always get the most likely token (greedy decoding). At higher temperatures, you get more diverse but potentially less coherent output. Karpathy typically uses temperature around 0.8 for creative text generation.
           </p>
         </div>
@@ -453,53 +453,53 @@ class SimpleTokenizer:
 
       <!-- Section 12: Summary -->
       <TutorialSection id="summary" step="12" title="What We Built" subtitle="Recap of the complete GPT architecture.">
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           Congratulations! You've built a complete GPT model from scratch. Let's recap all the components:
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
-          <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
+          <div class="bg-zinc-50 dark:bg-black rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
             <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">1. Tokenizer</h3>
-            <p class="text-sm text-zinc-600">Converts raw text → token IDs using BPE or character-level encoding.</p>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Converts raw text → token IDs using BPE or character-level encoding.</p>
           </div>
-          <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
+          <div class="bg-zinc-50 dark:bg-black rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
             <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">2. Embeddings</h3>
-            <p class="text-sm text-zinc-600">Looks up dense vectors for each token ID from an embedding table.</p>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Looks up dense vectors for each token ID from an embedding table.</p>
           </div>
-          <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
+          <div class="bg-zinc-50 dark:bg-black rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
             <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">3. Positional Encoding</h3>
-            <p class="text-sm text-zinc-600">Adds position information so the model knows token order.</p>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Adds position information so the model knows token order.</p>
           </div>
-          <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
+          <div class="bg-zinc-50 dark:bg-black rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
             <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">4. Multi-Head Attention</h3>
-            <p class="text-sm text-zinc-600">Allows each token to attend to all previous tokens in parallel.</p>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Allows each token to attend to all previous tokens in parallel.</p>
           </div>
-          <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
+          <div class="bg-zinc-50 dark:bg-black rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
             <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">5. Feed-Forward Network</h3>
-            <p class="text-sm text-zinc-600">Two-layer MLP processed independently at each position.</p>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Two-layer MLP processed independently at each position.</p>
           </div>
-          <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
+          <div class="bg-zinc-50 dark:bg-black rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
             <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">6. Residual + LayerNorm</h3>
-            <p class="text-sm text-zinc-600">Stabilizes training and allows gradient flow through deep networks.</p>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Stabilizes training and allows gradient flow through deep networks.</p>
           </div>
-          <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
+          <div class="bg-zinc-50 dark:bg-black rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
             <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">7. LM Head</h3>
-            <p class="text-sm text-zinc-600">Projects final hidden states to vocabulary-sized logits.</p>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Projects final hidden states to vocabulary-sized logits.</p>
           </div>
-          <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
+          <div class="bg-zinc-50 dark:bg-black rounded-lg p-4 border border-zinc-200 dark:border-zinc-800">
             <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">8. Sampling</h3>
-            <p class="text-sm text-zinc-600">Samples from softmax probabilities to generate new text.</p>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Samples from softmax probabilities to generate new text.</p>
           </div>
         </div>
 
         <DiagramTransformer />
 
-        <p class="text-zinc-700 leading-relaxed">
+        <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">
           The key takeaway: despite their impressive capabilities, GPT models are fundamentally simple. They're just a stack of matrix multiplications with attention mechanisms, trained on massive text corpora. The power comes from scale — more data, more parameters, more compute — not from magical new ideas.
         </p>
 
-        <div class="bg-orange-50 border-l-4 border-orange-400 p-4 my-6">
-          <p class="text-sm text-orange-800">
+        <div class="bg-orange-50 dark:bg-black dark:border-orange-500 border-l-4 border-orange-400 p-4 my-6">
+          <p class="text-sm text-orange-800 dark:text-orange-300">
             <strong>Next steps:</strong> Try training the model on a small corpus (like a book or Wikipedia articles). Experiment with different hyperparameters: d_model, num_heads, num_layers, learning rate. See how the quality of generated text scales with model size and training data. The full code from Karpathy's series is available at <a href="https://github.com/karpathy/llm.c" target="_blank" rel="noopener" class="text-orange-600 hover:text-orange-700 underline">github.com/karpathy/llm.c</a>.
           </p>
         </div>

@@ -17,7 +17,6 @@ export default defineNuxtConfig({
       title: 'John Paul Wile — I break things quickly and write about AI tech',
       htmlAttrs: {
         lang: 'en',
-        class: 'dark',
       },
       bodyAttrs: {
         class: '',

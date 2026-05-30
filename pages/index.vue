@@ -26,7 +26,7 @@
           </a>
           <NuxtLink
             to="/projects"
-            class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-zinc-900 dark:text-white bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-colors"
+            class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-zinc-900 bg-zinc-100 hover:bg-zinc-200 dark:text-white dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-lg transition-colors"
           >
             View Projects
           </NuxtLink>

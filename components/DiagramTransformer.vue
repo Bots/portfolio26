@@ -1,8 +1,8 @@
 <template>
   <div class="my-8 overflow-x-auto">
-    <svg viewBox="0 0 900 620" class="w-full max-w-[900px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 900 620" class="diagram-transformer w-full max-w-[900px] mx-auto" xmlns="http://www.w3.org/2000/svg">
       <!-- Background -->
-      <rect width="900" height="620" fill="#fafafa" rx="8" />
+      <rect width="900" height="620" fill="#fafafa" class="dark:fill-zinc-950" rx="8" />
 
       <!-- Input side: Text Input -->
       <g transform="translate(10, 250)">
@@ -112,3 +112,19 @@
     </svg>
   </div>
 </template>
+
+<style scoped>
+.dark .diagram-transformer text {
+  fill: #d4d4d8 !important;
+}
+.dark .diagram-transformer rect:not([fill="#fafafa"]):not([fill="#000000"]) {
+  fill-opacity: 0.15;
+}
+.dark .diagram-transformer line,
+.dark .diagram-transformer path {
+  stroke: #71717a !important;
+}
+.dark .diagram-transformer polygon {
+  fill: #71717a !important;
+}
+  </style>
