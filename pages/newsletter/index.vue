@@ -3,7 +3,7 @@
     <div class="max-w-6xl mx-auto">
       <div class="mb-12">
         <h1 class="text-3xl sm:text-4xl font-bold text-zinc-900">Newsletter</h1>
-        <p class="mt-4 text-lg text-zinc-600 max-w-2xl">
+        <p class="mt-4 text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl">
           Thoughts on AI, development, and technology. Published on <a href="https://johnpaulwile.substack.com" target="_blank" rel="noopener" class="text-orange-500 hover:text-orange-600 transition-colors underline">Substack</a>.
         </p>
       </div>
@@ -30,14 +30,14 @@
                 :href="post.link"
                 target="_blank"
                 rel="noopener"
-                class="text-zinc-900 hover:text-orange-500 transition-colors line-clamp-1"
+                class="text-zinc-900 dark:text-white hover:text-orange-500 transition-colors line-clamp-1"
               >
                 {{ post.title }}
               </a>
             </UiCardTitle>
           </UiCardHeader>
           <UiCardContent>
-            <p class="text-zinc-600 line-clamp-3">
+            <p class="text-zinc-600 dark:text-zinc-400 line-clamp-3">
               {{ stripHtml(post.description) }}
             </p>
           </UiCardContent>

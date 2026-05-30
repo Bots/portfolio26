@@ -1,11 +1,11 @@
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 transition-shadow"
+    class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-shadow"
     :class="{ 'shadow-sm': isScrolled }"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <nav class="h-16 flex items-center justify-between">
-        <NuxtLink to="/" class="text-xl font-bold text-zinc-900 hover:text-orange-500 transition-colors flex items-center gap-2">
+        <NuxtLink to="/" class="text-xl font-bold text-zinc-900 dark:text-white hover:text-orange-500 transition-colors flex items-center gap-2">
           <span class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-sm font-bold">JP</span>
           <span class="hidden sm:inline">John Paul Wile</span>
         </NuxtLink>
@@ -18,12 +18,13 @@
             :to="item.path"
             :class="[
               'text-sm font-medium transition-colors relative py-1',
-              isActive(item.path) ? 'text-orange-500' : 'text-zinc-600 hover:text-orange-500'
+              isActive(item.path) ? 'text-orange-500' : 'text-zinc-600 dark:text-zinc-400 hover:text-orange-500'
             ]"
           >
             {{ item.label }}
             <span v-if="isActive(item.path)" class="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-500 rounded-full" />
           </NuxtLink>
+          <ThemeToggle />
           <a
             href="https://johnpaulwile.substack.com"
             target="_blank"
@@ -35,27 +36,30 @@
         </div>
 
         <!-- Mobile menu button -->
-        <button
-          class="md:hidden p-2 text-zinc-600 hover:text-zinc-900"
-          @click="isOpen = !isOpen"
-        >
-          <svg v-if="!isOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <div class="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            class="p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+            @click="isOpen = !isOpen"
+          >
+            <svg v-if="!isOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </nav>
 
       <!-- Page title -->
       <div v-if="currentPage" class="hidden md:flex h-8 items-center">
-        <span class="text-sm font-medium text-zinc-500">{{ currentPage }}</span>
+        <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">{{ currentPage }}</span>
       </div>
     </div>
 
     <!-- Mobile menu -->
-    <div v-show="isOpen" class="md:hidden bg-white border-b border-zinc-200">
+    <div v-show="isOpen" class="md:hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800">
       <div class="px-4 py-4 space-y-3">
         <NuxtLink
           v-for="item in navItems"
@@ -63,7 +67,7 @@
           :to="item.path"
           :class="[
             'block text-sm font-medium transition-colors py-2',
-            isActive(item.path) ? 'text-orange-500' : 'text-zinc-600 hover:text-orange-500'
+            isActive(item.path) ? 'text-orange-500' : 'text-zinc-600 dark:text-zinc-400 hover:text-orange-500'
           ]"
           @click="isOpen = false"
         >
@@ -90,9 +94,13 @@ const isScrolled = ref(false);
 
 // Scroll detection for navbar shadow
 onMounted(() => {
-  window.addEventListener('scroll', () => {
-    isScrolled.value = window.scrollY > 10;
-  }, { passive: true });
+  window.addEventListener(
+    'scroll',
+    () => {
+      isScrolled.value = window.scrollY > 10;
+    },
+    { passive: true },
+  );
 });
 
 const navItems = [
@@ -100,6 +108,7 @@ const navItems = [
   { label: 'About', path: '/about' },
   { label: 'Newsletter', path: '/newsletter' },
   { label: 'Projects', path: '/projects' },
+  { label: 'Tutorial', path: '/tutorial' },
   { label: 'Contact', path: '/contact' },
 ];
 

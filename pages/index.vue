@@ -8,10 +8,10 @@
           style="background-image: url('/jp2.jpg');"
         />
         <div class="text-center sm:text-left">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 tracking-tight">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-white tracking-tight">
             John Paul Wile
           </h1>
-          <p class="mt-4 text-lg sm:text-xl text-zinc-600 max-w-2xl">
+          <p class="mt-4 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl">
             I break things quickly and write about AI tech.
           </p>
           <p class="mt-2 text-sm text-zinc-500">Full-Stack Developer & Writer · Colorado Springs, CO</p>
@@ -26,7 +26,7 @@
           </a>
           <NuxtLink
             to="/projects"
-            class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-zinc-900 bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-colors"
+            class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-zinc-900 dark:text-white bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-colors"
           >
             View Projects
           </NuxtLink>
@@ -58,7 +58,7 @@
                 :href="post.link"
                 target="_blank"
                 rel="noopener"
-                class="text-zinc-900 hover:text-orange-500 transition-colors line-clamp-2"
+                class="text-zinc-900 dark:text-white hover:text-orange-500 transition-colors line-clamp-2"
               >
                 {{ post.title }}
               </a>
@@ -84,8 +84,8 @@
     <!-- About Preview -->
     <section class="py-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 mb-4">About Me</h2>
-        <p class="text-zinc-600 text-lg max-w-2xl mx-auto mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-4">About Me</h2>
+        <p class="text-zinc-600 dark:text-zinc-400 text-lg max-w-2xl mx-auto mb-8">
           Full-Stack Developer & Tech Lead from Colorado Springs. I build things, break them, and write about what I learn along the way.
         </p>
         <NuxtLink
@@ -118,7 +118,7 @@
                   :href="project.html_url"
                   target="_blank"
                   rel="noopener"
-                  class="text-zinc-900 hover:text-orange-500 transition-colors"
+                  class="text-zinc-900 dark:text-white hover:text-orange-500 transition-colors"
                 >
                   {{ project.name }}
                 </a>
@@ -154,7 +154,7 @@
           href="https://johnpaulwile.substack.com"
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-zinc-900 bg-orange-500 rounded-lg hover:bg-orange-600 transition-colors"
+          class="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-zinc-900 dark:text-white bg-orange-500 rounded-lg hover:bg-orange-600 transition-colors"
         >
           Subscribe on Substack
         </a>

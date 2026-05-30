@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gradient-to-b from-zinc-900 to-zinc-950 text-zinc-400">
+  <footer class="bg-zinc-950 dark:bg-black text-zinc-400">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Brand -->

@@ -76,7 +76,7 @@
           <div v-else class="text-center py-8">
             <div class="text-4xl mb-4">✓</div>
             <p class="text-lg font-medium text-zinc-900">Message sent!</p>
-            <p class="text-zinc-600 mt-1">I'll get back to you soon.</p>
+            <p class="text-zinc-600 dark:text-zinc-400 mt-1">I'll get back to you soon.</p>
             <UiButton variant="outline" class="mt-4" @click="resetForm">
               Send another message
             </UiButton>
@@ -86,7 +86,7 @@
 
       <!-- Direct contact -->
       <div class="mt-12 bg-zinc-50 rounded-xl p-6 sm:p-8">
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 mb-4">Or reach me directly</h3>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-4">Or reach me directly</h3>
         <div class="flex flex-col sm:flex-row gap-4">
           <a
             href="mailto:botsone@gmail.com"
