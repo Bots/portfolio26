@@ -8,9 +8,18 @@
         </svg>
         <span class="text-sm font-medium text-orange-800 dark:text-orange-300">Your Turn</span>
       </div>
-      <span v-if="explanation" class="text-xs px-2 py-1 rounded-full bg-orange-200/50 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300">
-        {{ difficulty }}
-      </span>
+      <div class="flex items-center gap-2">
+         <span v-if="difficulty" class="text-xs px-2 py-1 rounded-full bg-orange-200/50 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300">
+           {{ difficulty }}
+         </span>
+         <button
+           v-if="hint"
+           @click="showHint = true; hintLevel = Math.max(hintLevel, 1)"
+           class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors"
+         >
+           💡 Need a hint?
+         </button>
+       </div>
     </div>
 
     <div class="bg-white dark:bg-zinc-900 p-4">
@@ -32,11 +41,15 @@
 
       <!-- Code editor -->
       <div class="relative">
+        <pre
+          aria-hidden="true"
+          class="absolute inset-0 pointer-events-none font-mono text-sm p-4 whitespace-pre-wrap leading-relaxed overflow-hidden"
+          style="min-height: 180px; max-height: 180px;"
+        >{{ placeholder }}</pre>
         <textarea
           :value="code"
           @input="onInput"
-          :placeholder="placeholder"
-          class="w-full font-mono text-sm bg-white dark:bg-zinc-900 text-zinc-900 dark:text-green-400 p-4 rounded-md min-h-[180px] resize-y focus:outline-none focus:ring-2 focus:ring-orange-500/50 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 leading-relaxed"
+          class="w-full font-mono text-sm bg-transparent text-zinc-900 dark:text-green-400 p-4 rounded-md min-h-[180px] resize-y focus:outline-none focus:ring-2 focus:ring-orange-500/50 leading-relaxed"
           spellcheck="false"
         />
       </div>
@@ -58,18 +71,27 @@
         </button>
 
         <button
-          @click="addHint"
-          class="px-4 py-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+          v-if="hint && !showHint"
+          @click="showHint = true; hintLevel = 1"
+          class="px-4 py-2 text-sm font-medium text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors"
         >
-          {{ hintLevel === 0 ? 'Show Hint' : `Hint ${hintLevel}/3` }}
+          💡 Show first hint
         </button>
 
         <button
-          v-if="showSolutionOpen"
-          @click="showSolutionOpen = false"
+          v-if="hint && showHint && hintLevel < 3"
+          @click="addHint"
+          class="px-4 py-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+        >
+          More detail →
+        </button>
+
+        <button
+          v-if="solution"
+          @click="showSolutionOpen = !showSolutionOpen"
           class="px-4 py-2 text-sm font-medium text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/30 rounded-md hover:bg-orange-100 dark:hover:bg-orange-950/50 transition-colors"
         >
-          Hide solution
+          {{ showSolutionOpen ? 'Hide solution' : 'Show solution' }}
         </button>
 
         <button
@@ -83,22 +105,41 @@
 
       <!-- Hint 1: Basic hint -->
       <Transition name="hint">
-        <div v-if="showHint && hintLevel >= 1 && hint" class="mt-3 text-sm text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 p-3 rounded-md border border-amber-200 dark:border-amber-900/50">
-          <strong>Hint 1:</strong> {{ hint }}
+        <div v-if="showHint && hintLevel >= 1 && hint" class="mt-3 text-sm text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/30 p-4 rounded-md border border-amber-200 dark:border-amber-800">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-lg">💡</span>
+            <strong class="text-amber-900 dark:text-amber-200">Hint:</strong>
+          </div>
+          <p class="ml-7">{{ hint }}</p>
         </div>
       </Transition>
 
       <!-- Hint 2: More detail -->
       <Transition name="hint">
-        <div v-if="showHint && hintLevel >= 2 && hintDetail" class="mt-2 text-sm text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 p-3 rounded-md border border-amber-200 dark:border-amber-900/50">
-          <strong>Hint 2:</strong> {{ hintDetail }}
+        <div v-if="showHint && hintLevel >= 2 && hintDetail" class="mt-2 text-sm text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/30 p-4 rounded-md border border-amber-200 dark:border-amber-800">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-lg">🔍</span>
+            <strong class="text-amber-900 dark:text-amber-200">More detail:</strong>
+          </div>
+          <p class="ml-7">{{ hintDetail }}</p>
         </div>
       </Transition>
 
       <!-- Hint 3: Near-solution -->
       <Transition name="hint">
-        <div v-if="showHint && hintLevel >= 3 && hintFull" class="mt-2 text-sm text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 p-3 rounded-md border border-amber-200 dark:border-amber-900/50">
-          <strong>Hint 3:</strong> {{ hintFull }}
+        <div v-if="showHint && hintLevel >= 3 && hintFull" class="mt-2 text-sm text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/30 p-4 rounded-md border border-amber-200 dark:border-amber-800">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-lg">✨</span>
+            <strong class="text-amber-900 dark:text-amber-200">Here's the key:</strong>
+          </div>
+          <p class="ml-7">{{ hintFull }}</p>
+        </div>
+      </Transition>
+
+      <!-- Stuck message -->
+      <Transition name="hint">
+        <div v-if="showHint && hintLevel >= 2 && solution" class="mt-3 text-xs text-zinc-500 dark:text-zinc-400 italic">
+          Still stuck? Click "Show solution" above to see the full answer.
         </div>
       </Transition>
 
@@ -159,7 +200,6 @@ function check() {
 }
 
 function addHint() {
-  showHint.value = true;
   hintLevel.value = Math.min(hintLevel.value + 1, 3);
 }
 
